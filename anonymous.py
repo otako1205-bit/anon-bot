@@ -1,3 +1,37 @@
+import discord
+from discord.ext import commands
+from discord import app_commands
+import json
+import os
+from datetime import datetime
+
+CONFIG_FILE = "anon_config.json"
+LOG_CHANNEL_ID = 1512381066776674436
+
+def load_config():
+    if os.path.exists(CONFIG_FILE):
+        with open(CONFIG_FILE, "r") as f:
+            return json.load(f)
+    return {
+        "button_embed": {
+            "title": "🪽 رسالة مجهولة",
+            "description": "اضغطي الزر عشان ترسلين رسالة مجهولة لأي عضو!",
+            "color": 0xc9b1ff,
+            "image": None
+        },
+        "message_embed": {
+            "title": "🪽 رسالة مجهولة",
+            "description": "وصلتك رسالة مجهولة!",
+            "color": 0xc9b1ff,
+            "image": None
+        }
+    }
+
+def save_config(config):
+    with open(CONFIG_FILE, "w") as f:
+        json.dump(config, f, indent=4)
+
+config = load_config()
 async def on_submit(self, interaction: discord.Interaction):
         await interaction.response.defer(ephemeral=True)
 
