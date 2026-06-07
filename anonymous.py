@@ -104,6 +104,7 @@ class AnonModal(discord.ui.Modal, title="🪽 رسالة مجهولة"):
             lambda m: m.name.lower() == username.lower() or m.display_name.lower() == username.lower(),
             interaction.guild.members
         )
+        if member is None:
             await interaction.followup.send("🪽 ما لقيت العضو، تأكدي من اليوزرنيم!", ephemeral=True)
             return
         if member == interaction.user:
